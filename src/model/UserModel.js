@@ -2,7 +2,7 @@ const connection = require('../config/db');
 
 const getAllUsers = (callback) => {
     connection.query(
-        'SELECT users.idUser users.email, users.password, users.phone,province.province_name, district.name, address.diachi FROM users JOIN address ON users.idUser = address.idUser JOIN district ON address.idDistrict = district.idDistrict JOIN province ON district.idProvince = province.idProvince',
+        'SELECT users.idUser, users.email, users.password, users.phone,province.province_name, district.district_name, address.address_name FROM users JOIN address ON users.idUser = address.idUser JOIN district ON address.idDistrict = district.idDistrict JOIN province ON district.idProvince = province.idProvince',
         function (error, results) {
             if (error) {
                 console.log('err', error);
@@ -14,7 +14,7 @@ const getAllUsers = (callback) => {
 
 const getUserById = (id, callback) => {
     connection.query(
-        'SELECT users.idUser, users.email, users.password, users.phone,province.province_name, district.name, address.diachi FROM users JOIN address ON users.idUser = address.idUser JOIN district ON address.idDistrict = district.idDistrict JOIN province ON district.idProvince = province.idProvince WHERE users.idUser = ?',
+        'SELECT users.idUser, users.email, users.password, users.phone,province.province_name, district.district_name, address.address_name FROM users JOIN address ON users.idUser = address.idUser JOIN district ON address.idDistrict = district.idDistrict JOIN province ON district.idProvince = province.idProvince WHERE users.idUser = ?',
         id,
         function (error, results, fields) {
             if (error) throw error;
